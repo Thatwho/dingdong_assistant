@@ -1,0 +1,70 @@
+{
+    "payment_order": {
+        "reserved_time_start": 1650261622,
+        "reserved_time_end": 1650263400,
+        "price": "128.00",
+        "freight_discount_money": "5.00",
+        "freight_money": "5.00",
+        "order_freight": "0.00",
+        "parent_order_sign": "069685c3a99e7d437ee999d14ce3a9b8",
+        "product_type": 1,
+        "address_id": "605e75673519db000159d25d",
+        "form_id": "d36247dd016145bca66a610aa86cf79d",
+        "receipt_without_sku": null,
+        "pay_type": 6,
+        "vip_money": "",
+        "vip_buy_user_ticket_id": "",
+        "coupons_money": "",
+        "coupons_id": ""
+    },
+    "packages": [
+        {
+            "products": [
+                {
+                    "id": "61e92fffe1d458ce9d26fe86",
+                    "parent_id": "",
+                    "count": 1,
+                    "cart_id": "61e92fffe1d458ce9d26fe86",
+                    "price": "128.00",
+                    "product_type": 0,
+                    "is_booking": 0,
+                    "product_name": "智利进口红魔鬼魔尊红葡萄酒 750ml/瓶",
+                    "small_image": "https://imgnew.ddimg.mobi/product/52a8ec56f52b42609f6950bf17ff68ff.jpg?width=800&height=800",
+                    "sale_batches": {
+                        "batch_type": -1
+                    },
+                    "order_sort": 1,
+                    "sizes": []
+                }
+            ],
+            "total_money": "128.00",
+            "total_origin_money": "128.00",
+            "goods_real_money": "128.00",
+            "total_count": 1,
+            "cart_count": 1,
+            "is_presale": 0,
+            "instant_rebate_money": "0.00",
+            "total_rebate_money": "0.00",
+            "used_balance_money": "0.00",
+            "can_used_balance_money": "0.00",
+            "used_point_num": 0,
+            "used_point_money": "0.00",
+            "can_used_point_num": 0,
+            "can_used_point_money": "0.00",
+            "is_share_station": 0,
+            "only_today_products": [],
+            "only_tomorrow_products": [],
+            "package_type": 1,
+            "package_id": 1,
+            "front_package_text": "即时配送",
+            "front_package_type": 0,
+            "front_package_stock_color": "#2FB157",
+            "front_package_bg_color": "#fbfefc",
+            "eta_trace_id": "",
+            "reserved_time_start": 1650261622,
+            "reserved_time_end": 1650263400,
+            "soon_arrival": "",
+            "first_selected_big_time": 1
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "DingDongHeader": {
+    	"CityNumber":   "0101",
+    	"BuildVersion": "2.83.0",
+    	"DeviceID":     "osP8I0Y_61BdE-UqmuBc6aOQnoVA",
+    	"StationID":    "5bc5a951716de1a94f8b6fbc",
+    	"DChannel":     "applet",
+    	"OSVersion":    "[object Undefined]",
+    	"AppClientID":  "4",
+    	"Cookie":       "DDXQSESSID=8bd3177221dd07d568c88976d4f0303c",
+    	"IP":           "",
+    	"Longitude":    "121.51597",
+    	"Latitude":     "31.296135",
+    	"ApiVersion":   "9.50.0",
+    	"UID":          "5ff887ebbef9980001c364da",
+    	"UserAgent":    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat",
+    	"Referer":      "https://servicewechat.com/wx1e113254eda17715/425/page-frame.html"
+    },
+    "DingDongBody": {
+    	"UID":          "5ff887ebbef9980001c364da",
+    	"Longitude":    "121.51597",
+    	"Latitude":     "31.296135",
+    	"StationID":    "5bc5a951716de1a94f8b6fbc",
+    	"CityNumber":   "0101",
+    	"ApiVersion":   "9.50.0",
+    	"AppVersion":   "2.83.0",
+    	"AppletSource": "",
+    	"Channel":      "applet",
+    	"AppClientID":  "4",
+    	"ShareUID":     "",
+    	"OpenID":       "osP8I0Y_61BdE-UqmuBc6aOQnoVA",
+    	"H5Source":     "",
+    	"DeviceToken":  "WHJMrwNw1k/FKPjcOOgRd+OIAhs278G2+ynPr8kCRZg2Ip9Q8WOFIcoldDOWZxX1XDCEj5JfbCBLkkj8POSEvJgEvU03AoKnBdCW1tldyDzmauSxIJm5Txg==1487582755342",
+        "SID":          "8bd3177221dd07d568c88976d4f0303c"
+    }
+}

@@ -1,0 +1,80 @@
+body {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url("/people_leader.webp");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+form {
+  position : relative;
+  width  : 90%;
+  height : 860px;
+  margin : 0 auto;
+  /* padding: 1em; */
+  box-sizing: border-box;
+
+  display: grid;
+  grid-row-gap : 2%;
+  grid-template-columns : repeat(6, 1fr);
+  grid-template-rows    : 80% 2% 10%;
+}
+
+h2 {
+    margin-left: 15px;
+}
+
+#user-header {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+}
+
+#user-body {
+    grid-column: 4 / span 3;
+    grid-row: 1;
+}
+
+#body-content {
+    border-left: #222 dashed;
+}
+
+.button {
+    margin: auto;
+}
+
+#update-user-info {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+}
+
+#update-address {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+}
+
+#purchase {
+    grid-column: 5 / span 2;
+    grid-row: 2;
+}
+
+#message {
+    grid-column: 1 / span 6;
+    grid-row: 3;
+    border-style: dashed;
+}
+
+label{
+    /*左对齐*/
+    display: inline-block;
+    width:160px;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+}
+
+input {
+    width: 35em;
+}
+
+/* textarea {
+    display: block;
+    margin-left: 6px;
+} */

@@ -1,0 +1,53 @@
+[
+    {
+        "products": [
+            {
+                "id": "61e92fffe1d458ce9d26fe86",
+                "category_path": "",
+                "count": 1,
+                "price": "128.00",
+                "total_money": "",
+                "instant_rebate_money": "0.00",
+                "activity_id": "",
+                "conditions_num": "",
+                "product_type": 0,
+                "product_name": "智利进口红魔鬼魔尊红葡萄酒 750ml/瓶",
+                "sizes": [],
+                "type": 1,
+                "total_origin_money": "",
+                "price_type": 0,
+                "batch_type": 0,
+                "sub_list": [],
+                "order_sort": 1,
+                "origin_price": "128.00"
+            }
+        ],
+        "total_money": "128.00",
+        "total_origin_money": "128.00",
+        "goods_real_money": "128.00",
+        "total_count": 1,
+        "cart_count": 1,
+        "is_presale": 0,
+        "instant_rebate_money": "0.00",
+        "total_rebate_money": "0.00",
+        "used_balance_money": "0.00",
+        "can_used_balance_money": "0.00",
+        "used_point_num": 0,
+        "used_point_money": "0.00",
+        "can_used_point_num": 0,
+        "can_used_point_money": "0.00",
+        "is_share_station": 0,
+        "only_today_products": [],
+        "only_tomorrow_products": [],
+        "package_type": 1,
+        "package_id": 1,
+        "front_package_text": "即时配送",
+        "front_package_type": 0,
+        "front_package_stock_color": "#2FB157",
+        "front_package_bg_color": "#fbfefc",
+        "reserved_time": {
+            "end_timestamp": 1650263400,
+            "start_timestamp": 1650257869
+        }
+    }
+]

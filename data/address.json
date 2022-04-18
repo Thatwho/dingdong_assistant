@@ -1,0 +1,78 @@
+{
+    "success": true,
+    "code": 0,
+    "message": "",
+    "data": {
+        "valid_address": [
+            {
+                "id": "61f7658c72855600015e9631",
+                "gender": 1,
+                "mobile": "15316537682",
+                "location": {
+                    "typecode": "120302",
+                    "address": "南谯区同乐西路190号附近",
+                    "name": "宇业·天逸华府",
+                    "location": [
+                        118.327804,
+                        32.256332
+                    ],
+                    "id": "B0FFKXAK8M"
+                },
+                "label": "",
+                "user_name": "张",
+                "addr_detail": "桂圆26号2804",
+                "station_id": "5fa24c13239fe40001fe426b",
+                "station_name": "永乐站",
+                "is_default": false,
+                "city_number": "1410",
+                "info_status": 1,
+                "station_info": {
+                    "id": "5fa24c13239fe40001fe426b",
+                    "address": "",
+                    "name": "永乐站",
+                    "phone": "10103365",
+                    "business_time": "24h",
+                    "city_name": "滁州市",
+                    "city_number": "1410"
+                },
+                "village_id": "5ff2f85a9467d400016cea9a"
+            },
+            {
+                "id": "605e75673519db000159d25d",
+                "gender": 1,
+                "mobile": "15316537682",
+                "location": {
+                    "typecode": "120302",
+                    "address": "杨浦区黄兴路2053号",
+                    "name": "蓝天小区(政本路)",
+                    "location": [
+                        121.51597,
+                        31.296135
+                    ],
+                    "id": "B0FFGDWP57"
+                },
+                "label": "",
+                "user_name": "张",
+                "addr_detail": "221号楼 602",
+                "station_id": "5bc5a951716de1a94f8b6fbc",
+                "station_name": "国济站",
+                "is_default": true,
+                "city_number": "0101",
+                "info_status": 1,
+                "station_info": {
+                    "id": "5bc5a951716de1a94f8b6fbc",
+                    "address": "",
+                    "name": "国济站",
+                    "phone": "10103365",
+                    "business_time": "24h",
+                    "city_name": "上海市",
+                    "city_number": "0101"
+                },
+                "village_id": "5ed8b14a4fb79702538d4f60"
+            }
+        ],
+        "invalid_address": [],
+        "max_address_count": 10,
+        "can_add_address": true
+    }
+}
