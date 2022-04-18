@@ -15,6 +15,7 @@ import (
 	"dingdong_hacker/app/dingdong"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -61,7 +62,11 @@ func UpdateUserConfig(c *gin.Context) {
 
 // 执行后台购买逻辑
 func Purchase(c *gin.Context) {
-	dingdong.StartPurchase()
+    concurrentNum, _ := strconv.Atoi(c.DefaultQuery("conNum", "2"))
+    if concurrentNum == 0 {
+        concurrentNum = 2
+    }
+	dingdong.StartPurchase(concurrentNum)
 	c.JSON(http.StatusNoContent, nil)
 }
 
