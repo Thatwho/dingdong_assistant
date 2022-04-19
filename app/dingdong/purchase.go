@@ -10,10 +10,11 @@
 package dingdong
 
 import (
-    "dingdong_hacker/app/assets"
-    "fmt"
-    "sync"
-    "time"
+	"dingdong_hacker/app/assets"
+	"fmt"
+	"math/rand"
+	"sync"
+	"time"
 )
 
 // 全局地址ID
@@ -52,6 +53,11 @@ var FinishReason = ""
 // 购买指令管道
 var PurchaseChan = make(chan int)
 var purchaseStart bool = false
+
+// 返回随即休眠时间
+func RandomSleepTime() time.Duration {
+    return time.Duration(rand.Intn(300) + 200)
+}
 
 // 购买逻辑
 func Purchase(concurrentlNum int) {
@@ -100,7 +106,7 @@ func Purchase(concurrentlNum int) {
                             fmt.Println(prod.ProductName)
                         }
                     }
-                    time.Sleep(time.Millisecond * 300)
+                    time.Sleep(time.Millisecond * RandomSleepTime())
                 }
             }
         }(quitC)
@@ -135,7 +141,7 @@ func Purchase(concurrentlNum int) {
                             fmt.Println(reversedTime.StartTimeStamp)
                         }
                     }
-                    time.Sleep(time.Millisecond * 300)
+                    time.Sleep(time.Millisecond * RandomSleepTime())
                 }
             }
         }(quitC)
@@ -167,7 +173,7 @@ func Purchase(concurrentlNum int) {
                             }
                         }
                     }
-                    time.Sleep(time.Millisecond * 300)
+                    time.Sleep(time.Millisecond * RandomSleepTime())
                 }
             }
         }(quitC)
@@ -209,7 +215,7 @@ func Purchase(concurrentlNum int) {
                             FinishReason = ordCrtErr.Error()
                         }
                     }
-                    time.Sleep(time.Millisecond * 300)
+                    time.Sleep(time.Millisecond * RandomSleepTime())
                 }
             }
         }(quitC)
