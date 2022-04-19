@@ -10,10 +10,10 @@
 package dingdong
 
 import (
-	"dingdong_hacker/app/assets"
-	"fmt"
-	"sync"
-	"time"
+    "dingdong_hacker/app/assets"
+    "fmt"
+    "sync"
+    "time"
 )
 
 // 全局地址ID
@@ -54,7 +54,7 @@ var PurchaseChan = make(chan int)
 var purchaseStart bool = false
 
 // 购买逻辑
-func Purchase() {
+func Purchase(concurrentlNum int) {
     fmt.Println("开始抢购")
     quitC := make(chan bool)
     var cartInfo *CartResp
@@ -65,14 +65,15 @@ func Purchase() {
     wg := sync.WaitGroup{}
 
     // 1.轮询购物车
-    wg.Add(1)
-    go func(c chan bool) {
-        var newCartInfo *CartResp
-        defer wg.Done()
-        h, b := GetRequestData()
-        for {
-            select {
-                case quit, ok := <- c:
+    wg.Add(concurrentlNum)
+    for i := 0; i < concurrentlNum; i ++ {
+        go func(c chan bool) {
+            var newCartInfo *CartResp
+            defer wg.Done()
+            h, b := GetRequestData()
+            for {
+                select {
+                case quit, ok := <-c:
                     if !ok {
                         return
                     }
@@ -82,31 +83,38 @@ func Purchase() {
                 default:
                     newCartInfo, cartErr = GetCart(h, b)
                     // 如果购物车中没有有效商品
-                    if IsCartInvalidError(cartErr) {
-                        close(quitC)
-                        PurchaseFinished = true
-                        FinishReason = "没有可以购买的商品"
-                    } else if IsExpireError(cartErr) {
-                        close(quitC)
-                        PurchaseFinished = true
-                        FinishReason = "登录失效，请重新填写用户信息"
+                    if cartErr != nil {
+                        if IsCartInvalidError(cartErr) {
+                            close(quitC)
+                            PurchaseFinished = true
+                            FinishReason = "没有可以购买的商品"
+                        } else if IsExpireError(cartErr) {
+                            close(quitC)
+                            PurchaseFinished = true
+                            FinishReason = "登录失效，请重新填写用户信息"
+                        }
                     }
-                    if cartInfo == nil && newCartInfo != nil{
+                    if cartInfo == nil && newCartInfo != nil {
                         cartInfo = newCartInfo
+                        for _, prod := range cartInfo.Data.NewOrderProductList[0].Products {
+                            fmt.Println(prod.ProductName)
+                        }
                     }
                     time.Sleep(time.Millisecond * 300)
+                }
             }
-        }
-    }(quitC)
+        }(quitC)
+    }
 
     // 2.轮询配送时间
-    wg.Add(1)
-    go func(c chan bool) {
-        defer wg.Done()
-        h, b := GetRequestData()
-        for {
-            select {
-                case quit, ok := <- c:
+    wg.Add(concurrentlNum)
+    for i := 0; i < concurrentlNum; i++ {
+        go func(c chan bool) {
+            defer wg.Done()
+            h, b := GetRequestData()
+            for {
+                select {
+                case quit, ok := <-c:
                     if !ok {
                         return
                     }
@@ -116,25 +124,32 @@ func Purchase() {
                 default:
                     if cartInfo != nil {
                         reversedTime, reversedTimeErr = GetReverseTime(h, b, AddressID, cartInfo)
-                        if IsExpireError(reversedTimeErr) {
-                            close(quitC)
-                            PurchaseFinished = true
-                            FinishReason = "登录失效，请重新填写用户信息"
+                        if reversedTimeErr != nil {
+                            if IsExpireError(reversedTimeErr) {
+                                close(quitC)
+                                PurchaseFinished = true
+                                FinishReason = "登录失效，请重新填写用户信息"
+                            }
+                        }
+                        if reversedTime != nil {
+                            fmt.Println(reversedTime.StartTimeStamp)
                         }
                     }
                     time.Sleep(time.Millisecond * 300)
+                }
             }
-        }
-    }(quitC)
+        }(quitC)
+    }
 
-    // 3.轮询购物车
-    wg.Add(1)
-    go func(c chan bool) {
-        defer wg.Done()
-        h, b := GetRequestData()
-        for {
-            select {
-                case quit, ok := <- c:
+    // 3.轮询订单
+    wg.Add(concurrentlNum)
+    for i := 0; i < concurrentlNum; i++ {
+        go func(c chan bool) {
+            defer wg.Done()
+            h, b := GetRequestData()
+            for {
+                select {
+                case quit, ok := <-c:
                     if !ok {
                         return
                     }
@@ -144,25 +159,29 @@ func Purchase() {
                 default:
                     if reversedTime != nil {
                         orderInfo, ordInfoErr = CheckOrder(h, b, AddressID, cartInfo, reversedTime)
-                        if IsExpireError(ordInfoErr) {
-                            close(quitC)
-                            PurchaseFinished = true
-                            FinishReason = "登录失效，请重新填写用户信息"
+                        if ordInfoErr != nil {
+                            if IsExpireError(ordInfoErr) {
+                                close(quitC)
+                                PurchaseFinished = true
+                                FinishReason = "登录失效，请重新填写用户信息"
+                            }
                         }
                     }
                     time.Sleep(time.Millisecond * 300)
+                }
             }
-        }
-    }(quitC)
+        }(quitC)
+    }
 
     // // 4.轮询创建订单
-    wg.Add(1)
-    go func(c chan bool) {
-        defer wg.Done()
-        h, b := GetRequestData()
-        for {
-            select {
-                case quit, ok := <- c:
+    wg.Add(concurrentlNum)
+    for i := 0; i < concurrentlNum; i ++ {
+        go func(c chan bool) {
+            defer wg.Done()
+            h, b := GetRequestData()
+            for {
+                select {
+                case quit, ok := <-c:
                     if !ok {
                         return
                     }
@@ -170,14 +189,14 @@ func Purchase() {
                         return
                     }
                 default:
-                    if orderInfo != nil {
+                    if orderInfo != nil  && reversedTime != nil {
                         _, ordCrtErr = CreareOrder(h, b, AddressID, cartInfo, reversedTime, orderInfo)
                         // 如果订单创建成功，则关闭管道
                         if ordCrtErr == nil {
                             OrderCreatedTime = time.Now()
                             close(c)
                             PurchaseFinished = true
-                            for i:=0; i<10; i++ {    
+                            for i := 0; i < 10; i++ {
                                 fmt.Println("订单创建成功")
                             }
                         } else if IsExpireError(ordCrtErr) {
@@ -191,9 +210,10 @@ func Purchase() {
                         }
                     }
                     time.Sleep(time.Millisecond * 300)
+                }
             }
-        }
-    } (quitC)
+        }(quitC)
+    }
 
     // 模拟用
     // wg.Add(1)
@@ -215,7 +235,7 @@ func Purchase() {
     //                 OrderCreated = true;
     //                 OrderCreatedTime = time.Now()
     //                 close(c)
-    //         }            
+    //         }
     //     }
     // } (quitC)
 
@@ -229,27 +249,37 @@ func Purchase() {
             PurchaseFinished = true
             FinishReason = "长时间没有抢到，为避免风控，停止抢菜"
         }
-    } (quitC)
+    }(quitC)
+
+    // 重置购买已开始选项
+    purchaseStart = false
 
     wg.Wait()
 }
 
-// 后来购买逻辑
+// 后台购买逻辑
 func BackendPurchase(purchaseC chan int) {
-    // 等待开始指令
-    <- purchaseC
-
-    // 开始购买
-    Purchase()
-
+    for {
+        select {
+            // 等待开始指令
+            case concurrentNum, ok := <-purchaseC:
+                if !ok {
+                    return
+                }
+                // 开始购买
+                Purchase(concurrentNum)
+            default:
+                time.Sleep(time.Millisecond * 100)
+        }
+    }
     // 结束关闭管道
-    close(purchaseC)
+    // close(purchaseC)
 }
 
 // 发送购买指令
-func StartPurchase() {
+func StartPurchase(concurrentNum int) {
     if !purchaseStart {
-        PurchaseChan <- 1
+        PurchaseChan <- concurrentNum
         purchaseStart = true
     }
 }

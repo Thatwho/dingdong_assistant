@@ -263,6 +263,8 @@ type ReversedTime struct {
 
 // 配送时间响应
 type ReverseTimeResp struct {
+    Success bool `json:"success"`
+    Msg     string `json:"msg"`
 	Data []struct {
 		Time []struct {
 			Times []ReversedTime `json:"times"`
@@ -340,6 +342,14 @@ func GetReverseTime(
 
 	// 4.比对参数
 	var reverseTime ReversedTime
+    if !reverseTimeResp.Success {
+	    fmt.Printf("没有可用的配送时间: %s\n", reverseTimeResp.Msg)
+        return nil, fmt.Errorf("没有可用的配送时间")
+    }
+    if len(reverseTimeResp.Data[0].Time) == 0{
+	    fmt.Println("没有可用的配送时间")
+        return nil, fmt.Errorf("没有可用的配送时间")
+    }
 	for _, time := range reverseTimeResp.Data[0].Time[0].Times {
 		if *time.DisableType == 0 && !strings.Contains(*time.SelectMsg, "尽快") {
 			reverseTime = ReversedTime{
@@ -352,7 +362,7 @@ func GetReverseTime(
 		}
 	}
 	fmt.Println("没有可用的配送时间")
-	return &reverseTime, fmt.Errorf("没有可用的配送时间")
+	return nil, fmt.Errorf("没有可用的配送时间")
 }
 
 // 生成订单响应

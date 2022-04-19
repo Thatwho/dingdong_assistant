@@ -151,7 +151,9 @@ function Purchase() {
     return
   }
   // 请求地址
-  fetch("api/v1/purchase", {
+  let userCnfData = new FormData(userCnfForm);
+  conNum = userCnfData.get("concurrent_num")
+  fetch("api/v1/purchase?conNum=" + conNum, {
     method: "POST"
   }).then(function(response) {
     if (response.status == 204) {
@@ -216,6 +218,8 @@ function UpdatePurchasStatus() {
 function PollingStatus() {
   this.timeId = setInterval(() => {
     if (purchaseFinished) {
+      // 重置购买结束状态
+      purchaseFinished = false;
       clearInterval(this.timeId);
     };
     UpdatePurchasStatus();
